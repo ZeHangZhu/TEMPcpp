@@ -1,11 +1,12 @@
 /*
-* Copyright (C) 2023 ZeHangZhu
-* -*- coding:GBK -*-
+* (C) 2023 ZeHangZhu
+* -*-coding:GBK-*-
 */
 
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cctype.h> 
 
 using namespace std;
 
@@ -21,7 +22,10 @@ class Temp {
 		string format(string data);
 
 		/*反格式化字符串*/
-		string Unformat(string data);
+		string Unformat(string data);\
+		
+		/*检查类型*/
+		bool CheckType(char* type,string value); 
 	public:
 
 		/*
@@ -90,6 +94,10 @@ string Temp::Unformat(string data) {
 }
 
 int Temp::AddNewObject(string type_obj,string obj_name,string value) {
+	//检查值与类型是否相符
+	if(CheckType(tpye_obj.c_str(),value) == false){
+		return -1;
+	}
 
 	/*添加类型提示*/
 	if(type_obj == "char") {
